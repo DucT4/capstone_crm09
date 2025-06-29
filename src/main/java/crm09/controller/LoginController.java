@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import crm09.config.MySQLConfig;
+import crm09.entity.Roles;
 import crm09.entity.User;
 import crm09.utils.Md5Helper;
 
@@ -25,22 +26,26 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Cookie[] cookies = req.getCookies();
+		Cookie[] cookies;
 		String username = "";
 		String password = "";
 
-		for (Cookie cookie : cookies) {
-			String name = cookie.getName();
-			String value = cookie.getValue();
-			//
-			if (name.equals("sUserName")) {
-				username = value;
+		if (req.getCookies() != null) {
+			cookies = req.getCookies();
+			for (Cookie cookie : cookies) {
+				String name = cookie.getName();
+				String value = cookie.getValue();
+				//
+				if (name.equals("sUserName")) {
+					username = value;
+				}
+				if (name.equals("sPassword")) {
+					password = value;
+				}
+				System.out.println("Name : " + name + " - value : " + value);
 			}
-			if (name.equals("sPassword")) {
-				password = value;
-			}
-			System.out.println("Name : " + name + " - value : " + value);
 		}
+
 		req.setAttribute("email", username);
 		req.setAttribute("password", password);
 		req.getRequestDispatcher("login.jsp").forward(req, resp);
@@ -60,7 +65,8 @@ public class LoginController extends HttpServlet {
 		String password = req.getParameter("password");
 
 		// Bước 2 : Chuẩn bị câu truy vấn
-		String query = "SELECT * \n" + "FROM users u \n" + "WHERE u.email = ? AND u.password = ? ";
+		String query = "SELECT * \n" + "FROM users u  \n" + "JOIN roles r \n" + "ON u.id_role=r.id \n"
+				+ "WHERE u.email = ? AND u.password = ? ";
 
 		// Bước 3 : Mở kết nối CSDL
 		Connection connection = MySQLConfig.getConnection();
@@ -85,7 +91,9 @@ public class LoginController extends HttpServlet {
 				User user = new User();
 				user.setId(resultSet.getInt("id"));
 				user.setEmail(resultSet.getString("email"));
-
+				Roles role = new Roles();
+				role.setName(resultSet.getString("name"));
+				user.setRoles(role);
 				listUsers.add(user);
 			}
 
@@ -97,9 +105,15 @@ public class LoginController extends HttpServlet {
 				cookie.setMaxAge(10);
 				Cookie cookiePassword = new Cookie("sPassword", password);
 				System.out.println("Đăng nhập thành công");
+				String roleName = listUsers.get(0).getRoles().getName();
+				
+				Cookie cookeiRole = new Cookie("role", roleName);
+				// để tạo đc 1 cookie cần 2 điuef: new cookie và res.add..
 				// add cookie
+				
 				resp.addCookie(cookie);
 				resp.addCookie(cookiePassword);
+				resp.addCookie(cookeiRole);
 			} else {
 				System.out.println("Đăng nhập thất bại");
 			}
