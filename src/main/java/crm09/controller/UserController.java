@@ -32,7 +32,7 @@ public class UserController extends HttpServlet{
 		String phone = req.getParameter("phone");
 		int roleId = Integer.parseInt(req.getParameter("roleId"));
 		boolean isSuccess = userServices.insertuser(email, password, roleId, fullName, phone);
-		
+		System.out.println("add user successfull");
 		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
 	}
 }
