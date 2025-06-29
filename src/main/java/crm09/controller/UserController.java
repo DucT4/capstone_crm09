@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import crm09.entity.Roles;
+import crm09.entity.User;
 import crm09.services.UserServices;
 
 @WebServlet(name = "userController", urlPatterns = {"/user-add"})
@@ -30,9 +31,15 @@ public class UserController extends HttpServlet{
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		String phone = req.getParameter("phone");
-		int roleId = Integer.parseInt(req.getParameter("roleId"));
-		boolean isSuccess = userServices.insertuser(email, password, roleId, fullName, phone);
-		System.out.println("add user successfull");
+		Roles role_Id = new Roles();
+		role_Id.setId(Integer.parseInt(req.getParameter("roleId")));
+		User user = new User(email, role_Id, phone, password, fullName);
+		boolean isSuccess = userServices.insertuser(user);
+		if (isSuccess) {
+		      System.out.println("sucesss");
+		} else {
+		    System.out.println("failed!");
+		}
 		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
 	}
 }
