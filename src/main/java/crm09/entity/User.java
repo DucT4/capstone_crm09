@@ -7,8 +7,39 @@ public class User {
 	private String phone;
 	 private String password;
 	 private String fullName;
+     private String firstName;
+      private String lastName;
+      
 	 
-	 
+	public User(int id, String email, Roles roles, String phone, String password, String fullName, String firstName,
+			String lastName) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.roles = roles;
+		this.phone = phone;
+		this.password = password;
+		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public User() {
 		super();
 	}
