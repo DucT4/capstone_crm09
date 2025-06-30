@@ -148,21 +148,25 @@
 										</tr>
 									</thead>
 									<tbody>
-									<c:forEach items="${requestScope.LIST_USER}" var="user" varStatus="count">
-									<tr>
-											<td>${count.index+1}</td>
-											<td>${user.firstName }</td>
-											<td>${user.lastName }</td>
-											<td>${user.email }</td>
-											<td>${user.getRoles().getName()}</td>
-											<td><a href="#" class="btn btn-sm btn-primary">Sửa</a> <a
-												href="#" class="btn btn-sm btn-danger">Xóa</a> <a
-												href="user-details.html" class="btn btn-sm btn-info">Xem</a>
-											</td>
-										</tr>
-									
-									</c:forEach>
-										
+										<c:forEach items="${sessionScope.LIST_USER}" var="user"
+											varStatus="count">
+											<tr>
+												<td>${count.index+1}</td>
+												<td>${user.firstName }</td>
+												<td>${user.lastName }</td>
+												<td>${user.email }</td>
+												<td>${user.getRoles().getName()}</td>
+												<td><!-- <a href="#" class="btn btn-sm btn-primary">Sửa</a> -->
+												<button  class="btn btn-primary" type="submit" >Wacth</button>
+											<a href="deleteController?id=${user.id}" class="btn btn-sm btn-primary">Delete</a>
+										<!-- 		  <button  class="btn btn-success" type="submit"  >Xóa</button>	 -->
+												  <button  class="btn btn-danger" type="submit" >Edit </button>										
+													<!-- <a	href="user-details.html" class="btn btn-sm btn-info">Xem</a> -->
+												</td>
+											</tr>
+
+										</c:forEach>
+
 
 									</tbody>
 								</table>

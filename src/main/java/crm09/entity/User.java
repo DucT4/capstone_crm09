@@ -5,12 +5,21 @@ public class User {
 	private String email;
 	private Roles roles;
 	private String phone;
-	 private String password;
-	 private String fullName;
-     private String firstName;
-      private String lastName;
-      
-	 
+	private String password;
+	private String fullName;
+	private String firstName;
+	private String lastName;
+
+	public User(int id, String email, Roles roles, String phone, String password, String fullName) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.roles = roles;
+		this.phone = phone;
+		this.password = password;
+		this.fullName = fullName;
+	}
+
 	public User(int id, String email, Roles roles, String phone, String password, String fullName, String firstName,
 			String lastName) {
 		super();

@@ -66,8 +66,9 @@ public class UserRepository {
 			// connection database
 			conn = MySQLConfig.getConnection();
 			// create query
-			String sql = "SELECT*\n" + "FROM users u \n" + "WHERE u.id = ?";
-			// create object quyry
+			String sql = "\n" + "SELECT*\n" + "FROM users u \n" + "JOIN roles r \n" + "ON u.id_role= r.id\n"
+					+ "WHERE u.id = ?";
+			// create object quesry
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, Integer.parseInt(userID));
 			// excute
@@ -80,8 +81,10 @@ public class UserRepository {
 				String rsFullName = rs.getString("fullname");
 				Roles role = new Roles();
 				role.setName(rs.getString("name"));
-				role.setId(rs.getInt("id_role"));
-				user = new User(rsEmail, role, rsPhone, rsPassword, rsFullName);
+				int rsID = rs.getInt("id");
+
+				user = new User(rsID, rsEmail, role, rsPhone, rsPassword, rsFullName);
+
 			}
 		} catch (Exception e) {
 			try {
@@ -171,7 +174,6 @@ public class UserRepository {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, user.getId());
 			rs = ps.executeUpdate();
-
 		} catch (Exception e) {
 			try {
 				if (conn != null) {
