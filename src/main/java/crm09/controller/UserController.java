@@ -38,7 +38,7 @@ public class UserController extends HttpServlet{
 		User user = new User(email, role_Id, phone, password, fullName);
 		boolean isSuccess = userServices.insertuser(user);
 		if (isSuccess) {
-		      System.out.println("sucesss");
+		      System.out.println("add success");
 		} else {
 		    System.out.println("failed!");
 		}

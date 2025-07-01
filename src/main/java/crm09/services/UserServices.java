@@ -26,7 +26,7 @@ public class UserServices {
 	public User checkLogin(String email, String password) {
 		return userRepository.checkLogin(email, password);
 	}
-
+    // delete feature
 	public int delete(User user) {
 		return userRepository.delete(user);
 	}
@@ -42,5 +42,8 @@ public class UserServices {
 		return userRepository.getUserById(userID);
 
 	}
-
+    // update feature
+	public int update(User user) {
+		return userRepository.update(user);
+	}
 }

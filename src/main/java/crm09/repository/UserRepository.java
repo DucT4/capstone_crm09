@@ -1,3 +1,4 @@
+
 package crm09.repository;
 
 import java.sql.Connection;
@@ -186,4 +187,46 @@ public class UserRepository {
 		return rs;
 	}
 
+	// update user
+	public int update(User user) {
+		Connection conn = null;
+		int rs = 0;
+		try {
+
+			// connect database
+			conn = MySQLConfig.getConnection();
+			// create query
+			String sqlUser = "UPDATE users\n" + "SET email=?, fullname=?, phone=?\n" + "WHERE id=? ";
+			// create object query
+			// user
+			PreparedStatement psUser = conn.prepareStatement(sqlUser);
+			psUser.setString(1, user.getEmail());
+			String fullName = (user.getFirstName() + " " + user.getLastName()).trim();
+			user.setFullName(fullName);
+			System.out.println("fullname" +user.getFullName());
+			psUser.setString(2, user.getFullName());
+			psUser.setString(3, user.getPhone());
+			psUser.setInt(4, user.getId());
+			int rsUser = psUser.executeUpdate();
+			System.out.println("updte user");
+			// role
+			String sqlRole = "UPDATE roles\n" + "SET name=?\n" + "WHERE id=?";
+			PreparedStatement psRole = conn.prepareStatement(sqlRole);
+			psRole.setString(1, user.getRoles().getName());
+			psRole.setInt(2, user.getRoles().getId());
+			int rsRole = psRole.executeUpdate();
+			rs = rsRole + rsUser;
+			System.out.println("updte role");
+
+		} catch (Exception e) {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+		return rs;
+	}
 }
