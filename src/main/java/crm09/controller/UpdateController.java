@@ -20,7 +20,7 @@ public class UpdateController extends HttpServlet {
 		int roleId = Integer.parseInt(req.getParameter("idRole"));
 		int userId = Integer.parseInt(req.getParameter("idUser"));
 		String lastName = req.getParameter("lastName");
-		String firstName = req.getParameter("firsName");
+		String firstName = req.getParameter("firstName");
 		String email = req.getParameter("email");
 		String roleName = req.getParameter("roleName");
 		String fullName = (firstName + " " + lastName).trim();

@@ -160,7 +160,7 @@
 											 <input type="hidden" name="idUser" value="${user.id}"/>
 												<td>  ${count.index+1}</td>
 												<td>
-												<input type="text" name="firsName" value="${user.firstName }"/>
+												<input type="text" name="firstName" value="${user.firstName }"/>
 												
 												</td>
 												<td>
