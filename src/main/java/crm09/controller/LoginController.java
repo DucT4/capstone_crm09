@@ -55,12 +55,13 @@ public class LoginController extends HttpServlet {
 			resp.addCookie(cookieRole);
 			// get list user
 			List<User> listUser = new ArrayList<User>();
-			listUser = userServices.getAll();
+			listUser = userServices.getAll();	
 			HttpSession s = req.getSession();
 			s.setAttribute("LIST_USER", listUser);
 			
 //			System.out.println("list user: " + listUser.get(0).getFirstName());
 //			req.setAttribute("LIST_USER", listUser);
+			
 			System.out.println("user: " + listUser.size());
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		} else {

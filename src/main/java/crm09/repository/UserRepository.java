@@ -196,28 +196,27 @@ public class UserRepository {
 			// connect database
 			conn = MySQLConfig.getConnection();
 			// create query
-			String sqlUser = "UPDATE users\n" + "SET email=?, fullname=?, phone=?\n" + "WHERE id=? ";
+			String sqlUser = "UPDATE users\n"
+					          + "SET email=?, id_role=?, fullname=?\n"
+					          + "WHERE id=?";
 			// create object query
 			// user
 			PreparedStatement psUser = conn.prepareStatement(sqlUser);
 			psUser.setString(1, user.getEmail());
-			String fullName = (user.getFirstName() + " " + user.getLastName()).trim();
-			user.setFullName(fullName);
+			psUser.setInt(2, user.getRoles().getId());
+			//kiem tra fullname
 			System.out.println("fullname" +user.getFullName());
-			psUser.setString(2, user.getFullName());
-			psUser.setString(3, user.getPhone());
+			psUser.setString(3, user.getFullName());
 			psUser.setInt(4, user.getId());
-			int rsUser = psUser.executeUpdate();
+			 rs = psUser.executeUpdate();
 			System.out.println("updte user");
 			// role
-			String sqlRole = "UPDATE roles\n" + "SET name=?\n" + "WHERE id=?";
-			PreparedStatement psRole = conn.prepareStatement(sqlRole);
-			psRole.setString(1, user.getRoles().getName());
-			psRole.setInt(2, user.getRoles().getId());
-			int rsRole = psRole.executeUpdate();
-			rs = rsRole + rsUser;
-			System.out.println("updte role");
-
+//			String sqlRole = "UPDATE roles\n" + "SET name=?\n" + "WHERE id=?";
+//			PreparedStatement psRole = conn.prepareStatement(sqlRole);
+//			psRole.setString(1, user.getRoles().getName());
+//			psRole.setInt(2, user.getRoles().getId());
+			
+   System.out.println("row update : " + rs);
 		} catch (Exception e) {
 			try {
 				if (conn != null) {

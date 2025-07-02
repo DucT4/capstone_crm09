@@ -53,6 +53,14 @@ public class User {
 		super();
 	}
 
+	public User(int id, String email, Roles roles, String fullName) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.roles = roles;
+		this.fullName = fullName;
+	}
+
 	public User(String email, Roles roles, String phone, String password, String fullName) {
 		super();
 		this.email = email;
