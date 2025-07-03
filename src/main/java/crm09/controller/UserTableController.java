@@ -1,4 +1,3 @@
-
 package crm09.controller;
 
 import java.io.IOException;
@@ -15,24 +14,14 @@ import javax.servlet.http.HttpSession;
 import crm09.entity.User;
 import crm09.services.UserServices;
 
-@WebServlet(name = "deleteController", urlPatterns = "/deleteController")
-public class DeleteController extends HttpServlet {
+@WebServlet(name = "userTableController", urlPatterns = "/userTableController")
+public class UserTableController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		System.out.println("ud " + id);
+		List<User> listUser = new ArrayList<User>();
 		UserServices userServices = new UserServices();
-		User user = new User();
-		user = userServices.getUserById(id);
-		System.out.println("user" + user);
-		if (user != null) {
-			int row = userServices.delete(user);
-			System.out.println("rows delete: " + row);
-			resp.sendRedirect("userTableController");
-		} else {
-			System.out.println("delete failed!!!");
-			req.setAttribute("FAILED", "DELETE LOST");
-		}
-
+		listUser = userServices.getAll();
+		req.setAttribute("LIST_USER", listUser);
+		req.getRequestDispatcher("user-table.jsp").forward(req, resp);
 	}
 }

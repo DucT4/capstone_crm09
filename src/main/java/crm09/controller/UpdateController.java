@@ -23,20 +23,21 @@ public class UpdateController extends HttpServlet {
 		int userId = Integer.parseInt(req.getParameter("idUser"));
 		String lastName = req.getParameter("lastName");
 		String firstName = req.getParameter("firstName");
-		String email = req.getParameter("email");
+		String email = req.getParameter("email");	
 		String roleName = req.getParameter("roleName");
+		System.out.println("role name: " + roleName);
 		String fullName = (firstName + " " + lastName).trim();
 		Roles role = new Roles();
 		   
-		  if (roleName.equals("ADMIN")) {
+		  if (roleName.equalsIgnoreCase("ADMIN")) {
 			  role.setId(1);  
-		  } else if(roleName.equals("LEAD")) {
+		  } else if(roleName.equalsIgnoreCase("LEAD")) {
 			  role.setId(2);  
-		  } else if(roleName.equals("EMPLOYEE")) {
+		  } else if(roleName.equalsIgnoreCase("EMPLOYEE")) {
 			  role.setId(3);  
 		  }
 //		  role.setName(roleName);
-	   	System.out.println("role ID  + role name: " + role.getId() + role.getName());
+	   	System.out.println("role ID  + role name: " + role.getId() +  roleName);
 		User user = new User(userId, email, role, fullName);
 
 		
@@ -44,11 +45,7 @@ public class UpdateController extends HttpServlet {
 		int rowUpdate = userService.update(user);
 		if (rowUpdate > 0) {
 			System.out.println("success rows update: " + roleName);
-			List<User> listUser = new ArrayList<User>();
-			listUser = userService.getAll();
-			HttpSession s = req.getSession();
-			s.setAttribute("LIST_USER", listUser);
-			req.getRequestDispatcher("user-table.jsp").forward(req, resp);
+			resp.sendRedirect("userTableController");
 		} else {
 			System.out.println("update failed!!!!");
 			req.getRequestDispatcher("user-table.jsp").forward(req, resp);

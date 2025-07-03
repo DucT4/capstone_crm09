@@ -126,8 +126,7 @@
 						<h4 class="page-title">Danh sách thành viên</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="user-add.jsp" class="btn btn-sm btn-success">Thêm
-							mới</a>
+						<a href="user-add.jsp" class="btn btn-sm btn-success">Thêm mới</a>
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
@@ -136,9 +135,8 @@
 					<div class="col-sm-12">
 						<div class="white-box">
 							<div class="table-responsive">
-							<form action="updateController" method="post">
-							
-					
+
+
 								<table class="table" id="example">
 									<thead>
 										<tr>
@@ -151,43 +149,32 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${sessionScope.LIST_USER}" var="user"
-											varStatus="count">
-										   
-											<tr>
-										  <!-- lay idRole va idUser -->
-											<%--  <input type="hidden" name="idRole" value="${user.getRoles().id}"/> --%>
-											 <input type="hidden" name="idUser" value="${user.id}"/>
-												<td>  ${count.index+1}</td>
-												<td>
-												<input type="text" name="firstName" value="${user.lastName }"/>
-												
-												</td>
-												<td>
-												<input type="text" name="lastName" value="${user.firstName }"/>
-												
-												</td>
-												<td>
-												<input type="text" name="email" value="${user.email }"/>
-												
-												</td>
-												<td>
-												<input type="text" name="roleName" value="${user.getRoles().getName()}"/>
-												</td>
-												<td><!-- <a href="#" class="btn btn-sm btn-primary">Sửa</a> -->
-												<button  class="btn btn-primary" type="submit" >Wacth</button>
-											<a href="deleteController?id=${user.id}" class="btn btn-sm btn-primary">Delete</a>
-										<!-- 		  <button  class="btn btn-success" type="submit"  >Xóa</button>	 -->
-												  <button  class="btn btn-danger" type="submit" >Edit </button> <!-- <a	href="user-details.html" class="btn btn-sm btn-info">Xem</a> -->
-													</td>
-											</tr>
-
-										</c:forEach>
-
-
+										<form action="updateController" method="post">
+											
+											<c:forEach items="${LIST_USER}" var="user" varStatus="count">
+												<tr>
+													<form action="updateController" method="post">
+														<input type="hidden" name="idUser" value="${user.id}" />
+														<td>${count.index+1}</td>
+														<td><input type="text" name="firstName"
+															value="${user.lastName}" /></td>
+														<td><input type="text" name="lastName"
+															value="${user.firstName}" /></td>
+														<td><input type="text" name="email"
+															value="${user.email}" /></td>
+														<td><input type="text" name="roleName"
+															value="${user.getRoles().name}" /></td>
+														<td>
+															<button class="btn btn-danger" type="submit">Edit</button>
+															<a href="deleteController?id=${user.id}"
+															class="btn btn-sm btn-primary">Delete</a>
+														</td>
+													</form>
+												</tr>
+											</c:forEach>
 									</tbody>
 								</table>
-									</form>
+
 							</div>
 						</div>
 					</div>
