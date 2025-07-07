@@ -20,15 +20,12 @@
 <link
 	href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <!-- animation CSS -->
 <link href="css/animate.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="css/style.css" rel="stylesheet">
 <!-- color CSS -->
 <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
-<link rel="stylesheet" href="./css/custom.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -104,7 +101,7 @@
 							class="hide-menu">Quyền</span></a></li>
 					<li><a href="groupwork.html" class="waves-effect"><i
 							class="fa fa-table fa-fw" aria-hidden="true"></i><span
-							class="hide-menu">Dự án</span></a></li>
+							class="hide-menu">Công việc</span></a></li>
 					<li><a href="task.html" class="waves-effect"><i
 							class="fa fa-table fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Công việc</span></a></li>
@@ -123,61 +120,71 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Danh sách dự án</h4>
+						<h4 class="page-title">Thêm mới công việc</h4>
 					</div>
-					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="groupwork-add.html" class="btn btn-sm btn-success">Thêm
-							mới</a>
-					</div>
-					<!-- /.col-lg-12 -->
 				</div>
-				<!-- /row -->
+				<!-- /.row -->
+				<!-- .row -->
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-md-2 col-12"></div>
+					<div class="col-md-8 col-xs-12">
 						<div class="white-box">
-							<div class="table-responsive">
-								<table class="table" id="example">
-									<thead>
-										<tr>
-											<th>STT</th>
-											<th>Tên Dự Án</th>
-											<th>Ngày Bắt Đầu</th>
-											<th>Ngày Kết Thúc</th>
-											<th>Hành Động</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${LIST_PROJECT }" var="project"
-											varStatus="count">
-
-											<tr>
-												<form action="updateProjectController">
-													<input type="hidden" name="id" value="${project.id}" />
-
-													<td>${count.index+1}</td>
-													<td><input type="text" name="name"
-														value="${project.name}" /></td>
-													<td><input type="text" name="beginDay"
-														value="${project.beginDay}" /></td>
-													<td><input type="text" name="endDay"
-														value="${project.endDate }" /></td>
-													<td>
-														<button class="btn btn-success" type="submit">update</button>
-														<a href="deleteProjectController?id=${project.id}" class="btn btn-sm btn-danger">Xóa</a> 
-														<a
-														href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
-													</td>
-												</form>
-											</tr>
-
-										</c:forEach>
-
-										
-									</tbody>
-								</table>
-							</div>
+							<!--  -->
+							<form class="form-horizontal form-material" action="taskAddController" method="post">
+								<div class="form-group">
+									<label class="col-md-12">Dự án</label>
+									<div class="col-md-12">
+										<select class="form-control form-control-line"
+											name="projectId">
+											<c:out value="${LIST_PROJECT}" />
+											<c:forEach items="${LIST_PROJECT}" var="project">
+												<option value="${project.id}">${project.name}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Tên công việc</label>
+									<div class="col-md-12">
+										<input type="text" placeholder="Tên công việc" name="nameTask"
+											class="form-control form-control-line">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Người thực hiện</label>
+									<div class="col-md-12">
+										<select class="form-control form-control-line" name="userId">
+											<c:forEach items="${LIST_USER}" var="user">
+												<option value="${user.id}">${user.fullName}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Ngày bắt đầu</label>
+									<div class="col-md-12">
+										<input type="text" placeholder="yyyy-MM-dd" name="beginTask"
+											class="form-control form-control-line">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Ngày kết thúc</label>
+									<div class="col-md-12">
+										<input type="text" placeholder="yyyy-MM-dd" name="endTask"
+											class="form-control form-control-line">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="submit" class="btn btn-success">Lưu lại</button>
+										<a href="taskController" class="btn btn-primary">Quay lại</a>
+									</div>
+								</div>
+							</form>
+							<!--  -->
 						</div>
 					</div>
+					<div class="col-md-2 col-12"></div>
 				</div>
 				<!-- /.row -->
 			</div>
@@ -197,17 +204,10 @@
 		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 	<!--slimscroll JavaScript -->
 	<script src="js/jquery.slimscroll.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<!--Wave Effects -->
 	<script src="js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="js/custom.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable();
-		});
-	</script>
 </body>
 
 </html>

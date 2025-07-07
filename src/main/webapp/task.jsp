@@ -123,10 +123,10 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Danh sách dự án</h4>
+						<h4 class="page-title">Danh sách công việc</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="groupwork-add.html" class="btn btn-sm btn-success">Thêm
+						<a href="task-add.html" class="btn btn-sm btn-success">Thêm
 							mới</a>
 					</div>
 					<!-- /.col-lg-12 -->
@@ -140,39 +140,44 @@
 									<thead>
 										<tr>
 											<th>STT</th>
-											<th>Tên Dự Án</th>
+											<th>Tên Công Việc</th>
+											<th>Dự Án</th>
+											<th>Người Thực Hiện</th>
 											<th>Ngày Bắt Đầu</th>
 											<th>Ngày Kết Thúc</th>
+											<th>Trạng Thái</th>
 											<th>Hành Động</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${LIST_PROJECT }" var="project"
-											varStatus="count">
-
+										<c:forEach items="${LIST_TASK }" var="task" varStatus="count">
 											<tr>
-												<form action="updateProjectController">
-													<input type="hidden" name="id" value="${project.id}" />
+												<form action="updateTaskController" method="post"> 
+													<input type="hidden" name="id" value="${task.id }" />
+												<td>${count.index+1 }</td>
+												<td><input type="text" name="name"
+													value="${task.name }" /></td>
+												<td><input type="text" name="nameProject"
+													value="${task.getProject().name }" /></td>
+												<td><input type="text" name="worker"
+													value="${task.getUser().fullName}" /></td>
+												<td><input type="text" name="beginTask"
+													value="${task.beginTask}" /></td>
+												<td><input type="text" name="endTask"
+													value="${task.endTask}" /></td>
+												<td><input type="text" name="status"
+													value="${task.status}" /></td>
+												<td>
+													<button class="btn btn-success" type="submit">update</button>
+													<a href="deleteTaskController?id=${task.id }"
+													class="btn btn-sm btn-danger">Xóa</a> <a href="#"
+													class="btn btn-sm btn-info">Xem</a>
+												</td>
 
-													<td>${count.index+1}</td>
-													<td><input type="text" name="name"
-														value="${project.name}" /></td>
-													<td><input type="text" name="beginDay"
-														value="${project.beginDay}" /></td>
-													<td><input type="text" name="endDay"
-														value="${project.endDate }" /></td>
-													<td>
-														<button class="btn btn-success" type="submit">update</button>
-														<a href="deleteProjectController?id=${project.id}" class="btn btn-sm btn-danger">Xóa</a> 
-														<a
-														href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
-													</td>
 												</form>
 											</tr>
-
 										</c:forEach>
 
-										
 									</tbody>
 								</table>
 							</div>
@@ -210,4 +215,4 @@
 	</script>
 </body>
 
-</html>
+</html

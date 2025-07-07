@@ -97,6 +97,7 @@ public class ProjectsRepository {
 			String sql = "DELETE FROM projects\n" + "WHERE id=?";
 			// tao doi tg thuc thi cau query
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
 			// thuc thi
 			rs = ps.executeUpdate();
 			System.out.println("rows delete: " + rs);

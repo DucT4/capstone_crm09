@@ -10,22 +10,15 @@ public class Tasks {
   private Date endTask;
   private User user;
   private Projects project;
-public Tasks(int id, String name, String status, Date beginTask, Date endTask, User user, Projects project) {
-	super();
-	this.id = id;
-	this.name = name;
-	this.status = status;
-	this.beginTask = beginTask;
-	this.endTask = endTask;
-	this.user = user;
-	this.project = project;
-}
+
 public int getId() {
 	return id;
 }
+
 public void setId(int id) {
 	this.id = id;
 }
+
 public String getName() {
 	return name;
 }
