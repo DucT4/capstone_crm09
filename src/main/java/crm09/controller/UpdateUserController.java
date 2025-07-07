@@ -17,7 +17,7 @@ import crm09.entity.User;
 import crm09.services.UserServices;
 
 @WebServlet(name = "updateController", urlPatterns = "/updateController")
-public class UpdateController extends HttpServlet {
+public class UpdateUserController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int userId = Integer.parseInt(req.getParameter("idUser"));

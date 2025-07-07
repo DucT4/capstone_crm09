@@ -96,7 +96,7 @@
 					<li style="padding: 10px 0 0;"><a href="index.html"
 						class="waves-effect"><i class="fa fa-clock-o fa-fw"
 							aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
-					<li><a href="user-table.jsp" class="waves-effect"><i
+					<li><a href="user-table.html" class="waves-effect"><i
 							class="fa fa-user fa-fw" aria-hidden="true"></i><span
 							class="hide-menu">Thành viên</span></a></li>
 					<li><a href="role-table.html" class="waves-effect"><i
@@ -123,10 +123,11 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Danh sách thành viên</h4>
+						<h4 class="page-title">Danh sách dự án</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="user-add.jsp" class="btn btn-sm btn-success">Thêm mới</a>
+						<a href="groupwork-add.html" class="btn btn-sm btn-success">Thêm
+							mới</a>
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
@@ -135,46 +136,44 @@
 					<div class="col-sm-12">
 						<div class="white-box">
 							<div class="table-responsive">
-
-
 								<table class="table" id="example">
 									<thead>
 										<tr>
 											<th>STT</th>
-											<th>First Name</th>
-											<th>Last Name</th>
-											<th>Email</th>
-											<th>Role</th>
-											<th>Action</th>
+											<th>Tên Dự Án</th>
+											<th>Ngày Bắt Đầu</th>
+											<th>Ngày Kết Thúc</th>
+											<th>Hành Động</th>
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach items="${LIST_PROJECT }" var="project"
+											varStatus="count">
 
-
-										<c:forEach items="${LIST_USER}" var="user" varStatus="count">
 											<tr>
-												<form action="updateController" method="post">
-													<input type="hidden" name="idUser" value="${user.id}" />
-												<td>${count.index+1}</td>
-												<td><input type="text" name="firstName"
-													value="${user.lastName}" /></td>
-												<td><input type="text" name="lastName"
-													value="${user.firstName}" /></td>
-												<td><input type="text" name="email"
-													value="${user.email}" /></td>
-												<td><input type="text" name="roleName"
-													value="${user.getRoles().name}" /></td>
-												<td>
-													<button class="btn btn-danger" type="submit">Edit</button>
-													<a href="deleteController?id=${user.id}"
-													class="btn btn-sm btn-primary">Delete</a>
-												</td>
+												<form action="updateProjectController">
+													<input type="hidden" name="id" value="${project.id}" />
+
+													<td>${count.index+1}</td>
+													<td><input type="text" name="name"
+														value="${project.name}" /></td>
+													<td><input type="text" name="beginDay"
+														value="${project.beginDay}" /></td>
+													<td><input type="text" name="endDate"
+														value="${project.endDate }" /></td>
+													<td>
+														<button class="btn btn-success" type="submit">update</button>
+														<a href="#" class="btn btn-sm btn-danger">Xóa</a> <a
+														href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
+													</td>
 												</form>
 											</tr>
+
 										</c:forEach>
+
+										
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
@@ -197,7 +196,8 @@
 		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 	<!--slimscroll JavaScript -->
 	<script src="js/jquery.slimscroll.js"></script>
-	<script src="js/jquery.dataTables.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<!--Wave Effects -->
 	<script src="js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->

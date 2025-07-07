@@ -16,7 +16,7 @@ import crm09.entity.User;
 import crm09.services.UserServices;
 
 @WebServlet(name = "deleteController", urlPatterns = "/deleteController")
-public class DeleteController extends HttpServlet {
+public class DeleteUserController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");

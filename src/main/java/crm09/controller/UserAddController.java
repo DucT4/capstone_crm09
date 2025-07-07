@@ -16,7 +16,7 @@ import crm09.entity.User;
 import crm09.services.UserServices;
 
 @WebServlet(name = "userController", urlPatterns = {"/user-add"})
-public class UserController extends HttpServlet{
+public class UserAddController extends HttpServlet{
 	
 	private UserServices userServices = new UserServices();
 	
