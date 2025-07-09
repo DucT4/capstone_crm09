@@ -22,4 +22,9 @@ public class ProjectServices {
 	public int update(Projects project) {
 		return projectsRepository.update(project);
 	}
+	
+	//save 
+	public int save(Projects project) {
+		return projectsRepository.save(project);
+	}
 }

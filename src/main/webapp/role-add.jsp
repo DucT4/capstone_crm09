@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -102,7 +104,7 @@
                     </li>
                     <li>
                         <a href="task.html" class="waves-effect"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
+                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
                         <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
@@ -121,7 +123,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới dự án</h4>
+                        <h4 class="page-title">Thêm mới quyền</h4>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -130,29 +132,24 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" action ="roleAddController" method="post">
                                 <div class="form-group">
-                                    <label class="col-md-12">Tên dự án</label>
+                                    <label class="col-md-12">Tên quyền</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Tên công việc"
-                                            class="form-control form-control-line"> </div>
+                                        <input type="text" placeholder="Tên quyền" name="roleName"
+                                            class="form-control form-control-line" />
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Ngày bắt đầu</label>
+                                    <label class="col-md-12">Mô tả</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="dd/MM/yyyy"
-                                            class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Ngày kết thúc</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="dd/MM/yyyy"
-                                            class="form-control form-control-line"> </div>
+                                        <input name="decription" type="text" placeholder="Mô tả" class="form-control form-control-line" />
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success">Lưu lại</button>
-                                        <a href="groupwork.html" class="btn btn-primary">Quay lại</a>
+                                        <button type="submit" class="btn btn-success">Add Role</button>
+                                        <a href="rolesController" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>
                             </form>

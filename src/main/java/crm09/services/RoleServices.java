@@ -27,4 +27,9 @@ public class RoleServices {
     public int setActive() {
     	return rolesRepository.setActive();
     }
+    
+    //save
+    public int save(Roles role) {
+    	return rolesRepository.save(role);
+    }
 }

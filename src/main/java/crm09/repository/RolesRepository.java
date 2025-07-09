@@ -184,5 +184,32 @@ public class RolesRepository {
 		}
 		return rs;
 	}
-
+   //save
+	 public int save(Roles role) {
+		 Connection conn=null;
+		  int rs=0;
+		  try {
+			//ket noi database
+			  conn= MySQLConfig.getConnection();
+			  //create query
+			  String sql = "INSERT INTO roles\n"
+			  		+ "( name, description)\n"
+			  		+ "VALUES(?,?)";
+			  //create object query
+			  PreparedStatement ps = conn.prepareStatement(sql);
+			  ps.setString(1,role.getName());
+			  ps.setString(2,role.getDescription() );
+			  //thuc thu
+			  rs =ps.executeUpdate();
+		} catch (Exception e) {
+			try {
+				if (conn!=null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+		  return rs;
+	 }
 }

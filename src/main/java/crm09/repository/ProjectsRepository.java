@@ -122,9 +122,7 @@ public class ProjectsRepository {
 			// ket noi database
 			conn = MySQLConfig.getConnection();
 			// tao cau query
-			String sql = "UPDATE projects\n"
-					+ "SET name=?, start_day=?, end_day=?\n"
-					+ "WHERE id=?";
+			String sql = "UPDATE projects\n" + "SET name=?, start_day=?, end_day=?\n" + "WHERE id=?";
 			// tao doi tg thuc thi cau query
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, project.getName());
@@ -146,4 +144,39 @@ public class ProjectsRepository {
 		}
 		return rs;
 	}
+
+	// add project
+	public int save(Projects project) {
+		Connection conn = null;
+		int rs = 0;
+		try {
+			// connnect database
+			conn = MySQLConfig.getConnection();
+			// create sql
+			String sql =  "INSERT INTO crmapp.projects\n" + "( name, start_day, end_day, status)\n"
+					+ "VALUES( ?, ?, ?, ?)";
+			// tao doi tg query
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, project.getName());
+			ps.setDate(2, project.getBeginDay());
+			ps.setDate(3, project.getEndDate());
+			ps.setString(4,"Chua thuc hien");
+			//thuc thu
+			rs = ps.executeUpdate();
+
+		} catch (Exception e) {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e2) {
+
+				System.out.println(e2.getMessage());
+			}
+		}
+
+		return rs;
+
+	}
+
 }
